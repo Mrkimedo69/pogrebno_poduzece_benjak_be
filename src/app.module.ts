@@ -6,6 +6,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { FlowersModule } from './flowers/flowers.module';
 import { ArtikliModule } from './artikli/artikli.module';
+import { MonumentsModule } from './monuments/monuments.module';
+import { StoneMaterialsModule } from './stone-materials/stone-materials.module';
 
 @Module({
   imports: [
@@ -23,6 +25,8 @@ import { ArtikliModule } from './artikli/artikli.module';
     ConfigModule.forRoot({ isGlobal: true }),
     FlowersModule,
     ArtikliModule,
+    MonumentsModule,
+    StoneMaterialsModule,
 ],
   controllers: [AppController],
   providers: [AppService],

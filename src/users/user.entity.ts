@@ -5,9 +5,8 @@ export enum UserRole {
     WORKER = 'worker',
     USER = 'user',
   }
-  
-  @Entity()
-  export class Users {
+  @Entity('users')
+  export class User {
     @PrimaryGeneratedColumn()
     id: number;
   

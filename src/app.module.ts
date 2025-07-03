@@ -5,6 +5,7 @@ import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { FlowersModule } from './flowers/flowers.module';
+import { ArtikliModule } from './artikli/artikli.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { FlowersModule } from './flowers/flowers.module';
     }),
     ConfigModule.forRoot({ isGlobal: true }),
     FlowersModule,
+    ArtikliModule,
 ],
   controllers: [AppController],
   providers: [AppService],

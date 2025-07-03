@@ -1,7 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, UpdateDateColumn, CreateDateColumn } from 'typeorm';
 
 @Entity()
-export class Flower {
+export class PogrebniArtikl {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -20,10 +20,12 @@ export class Flower {
   @Column({ nullable: true })
   imageUrl: string;
 
+  @Column({ nullable: true })
+  category: string;
+
   @CreateDateColumn()
   createdAt: Date;
 
   @UpdateDateColumn()
   updatedAt: Date;
 }
-

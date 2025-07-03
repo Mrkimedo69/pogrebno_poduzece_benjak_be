@@ -15,7 +15,7 @@ export class StoneMaterial {
   color: string;
 
   @Column({ type: 'decimal', precision: 10, scale: 2 })
-  pricePerM2: number;
+  pricePerM3: number;
 
   @Column()
   isAvailable: boolean;

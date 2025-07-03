@@ -11,7 +11,5 @@ import { PogrebniArtikl } from './pogrebni-artikl.entity';
 })
 
 export class ArtikliModule {
-  constructor(private readonly artikliService: ArtikliService) {
-    this.artikliService.seedInitialItems();
-  }
+
 }

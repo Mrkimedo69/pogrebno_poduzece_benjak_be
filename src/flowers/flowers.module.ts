@@ -10,7 +10,4 @@ import { Flower } from './flower.entity';
   controllers: [FlowersController],
 })
 export class FlowersModule {
-  constructor(private flowersService: FlowersService) {
-    this.flowersService.seedInitialFlowers();
-  }
 }

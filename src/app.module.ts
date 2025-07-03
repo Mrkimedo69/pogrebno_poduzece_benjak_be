@@ -9,6 +9,7 @@ import { ArtikliModule } from './artikli/artikli.module';
 import { MonumentsModule } from './monuments/monuments.module';
 import { StoneMaterialsModule } from './stone-materials/stone-materials.module';
 import { PogrebniArtikl } from './artikli/pogrebni-artikl.entity';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { PogrebniArtikl } from './artikli/pogrebni-artikl.entity';
     MonumentsModule,
     StoneMaterialsModule,
     TypeOrmModule.forFeature([PogrebniArtikl,FlowersModule,UsersModule,MonumentsModule,StoneMaterialsModule]),
+    AuthModule,
 ],
   controllers: [AppController],
   providers: [AppService],

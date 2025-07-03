@@ -8,10 +8,10 @@ import { FlowersModule } from './flowers/flowers.module';
 import { ArtikliModule } from './artikli/artikli.module';
 import { MonumentsModule } from './monuments/monuments.module';
 import { StoneMaterialsModule } from './stone-materials/stone-materials.module';
+import { PogrebniArtikl } from './artikli/pogrebni-artikl.entity';
 
 @Module({
   imports: [
-    UsersModule, 
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
@@ -19,14 +19,17 @@ import { StoneMaterialsModule } from './stone-materials/stone-materials.module';
       username: 'postgres',
       password: 'admin',
       database: 'pogrebno_benjak_db',
+      entities:[PogrebniArtikl,FlowersModule,UsersModule,MonumentsModule,StoneMaterialsModule],
       autoLoadEntities: true,
       synchronize: true, 
     }),
     ConfigModule.forRoot({ isGlobal: true }),
+    UsersModule, 
     FlowersModule,
     ArtikliModule,
     MonumentsModule,
     StoneMaterialsModule,
+    TypeOrmModule.forFeature([PogrebniArtikl,FlowersModule,UsersModule,MonumentsModule,StoneMaterialsModule]),
 ],
   controllers: [AppController],
   providers: [AppService],

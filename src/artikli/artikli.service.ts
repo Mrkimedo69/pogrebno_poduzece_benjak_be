@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException, OnModuleInit } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { PogrebniArtikl } from './pogrebni-artikl.entity';
 
 @Injectable()
@@ -22,7 +22,9 @@ export class ArtikliService {
     }
     return artikl;
   }
-  
+  async findByIds(ids: number[]): Promise<PogrebniArtikl[]> {
+    return this.repo.find({ where: { id: In(ids) } });
+  }
   create(artikl: Partial<PogrebniArtikl>): Promise<PogrebniArtikl> {
     return this.repo.save(this.repo.create(artikl));
   }

@@ -10,7 +10,6 @@ export class ArtikliController {
   getAll(): Promise<PogrebniArtikl[]> {
     return this.artikliService.findAll();
   }
-
   @Post()
   create(@Body() data: Partial<PogrebniArtikl>): Promise<PogrebniArtikl> {
     return this.artikliService.create(data);
@@ -22,6 +21,10 @@ export class ArtikliController {
   @Delete(':id')
   delete(@Param('id') id: number): Promise<void> {
     return this.artikliService.remove(id);
+}
+@Post('batch')
+getByIds(@Body() body: { ids: number[] }) {
+  return this.artikliService.findByIds(body.ids);
 }
   @Put(':id')
   update(

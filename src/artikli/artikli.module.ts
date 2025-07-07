@@ -8,6 +8,7 @@ import { PogrebniArtikl } from './pogrebni-artikl.entity';
   imports: [TypeOrmModule.forFeature([PogrebniArtikl])],
   providers: [ArtikliService],
   controllers: [ArtikliController],
+  exports: [ArtikliService]
 })
 
 export class ArtikliModule {

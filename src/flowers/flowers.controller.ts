@@ -27,4 +27,9 @@ export class FlowersController {
   create(@Body() flower: Partial<Flower>): Promise<Flower> {
     return this.flowersService.create(flower);
   }
+  @Post('batch')
+  getFlowersByIds(@Body() body: { ids: number[] }) {
+    return this.flowersService.findByIds(body.ids);
+}
+
 }

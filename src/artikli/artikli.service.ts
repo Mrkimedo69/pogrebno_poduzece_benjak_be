@@ -37,5 +37,11 @@ export class ArtikliService {
   async remove(id: number): Promise<void> {
     await this.repo.delete(id);
   }
-
+  async findAllWithFullDetails(): Promise<PogrebniArtikl[]> {
+    return this.repo.find({
+      relations: ['relatedEntitiesIfAny'], 
+      order: { name: 'ASC' } 
+    });
+  }
+  
 }

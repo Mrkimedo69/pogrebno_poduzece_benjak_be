@@ -19,6 +19,7 @@ import { User } from './users/user.entity';
 import { CartItem } from './cart/cart-item.entity';
 import { Monument } from './monuments/spomenici.entity';
 import { StoneMaterial } from './stone-materials/stone-materials.entity';
+import { OrdersModule } from './order/order.module';
 
 @Module({
   imports: [
@@ -49,6 +50,7 @@ import { StoneMaterial } from './stone-materials/stone-materials.entity';
     AuthModule,
     PaymentModule,
     CartModule,
+    OrdersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -18,7 +18,7 @@ export class AuthService {
     }
     throw new UnauthorizedException('Neispravan email ili lozinka.');
   }
-
+  
   async login(user: any) {
     const payload = { email: user.email, sub: user.id, role: user.role };
     return {

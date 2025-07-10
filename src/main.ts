@@ -28,6 +28,18 @@ async function bootstrap() {
     });
     console.log(`✔ Admin korisnik stvoren (${adminEmail})`);
   }
+  const employeeEmail = 'zaposlenik@firma.hr';
+  const existingEmployee = await usersService.findByEmail(employeeEmail);
+
+  if (!existingEmployee) {
+    await usersService.create({
+      email: employeeEmail,
+      password: 'zaposlenik12345',
+      fullName: 'Employee',
+      role: UserRole.EMPLOYEE,
+    });
+    console.log(`✔ Employee korisnik stvoren (${employeeEmail})`);
+  }
   
   await app.listen(process.env.PORT ?? 3000);
 }

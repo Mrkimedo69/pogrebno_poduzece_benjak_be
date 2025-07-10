@@ -1,4 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeorm';
+import { OrderStatus } from './order-status.enum';
 
 @Entity()
 export class Order {
@@ -20,8 +21,8 @@ export class Order {
   @Column('decimal', { precision: 10, scale: 2 })
   totalPrice: number;
 
-  @Column({ default: 'pending' })
-  status: 'pending' | 'processed' | 'done';
+  @Column()
+  status: OrderStatus;
 
   @CreateDateColumn()
   createdAt: Date;

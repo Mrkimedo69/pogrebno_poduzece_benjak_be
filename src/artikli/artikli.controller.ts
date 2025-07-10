@@ -41,5 +41,6 @@ export class ArtikliController {
     @Body() data: Partial<PogrebniArtikl>,
   ): Promise<PogrebniArtikl> {
     return this.artikliService.update(id, data);
-}
+  }
+  
 }

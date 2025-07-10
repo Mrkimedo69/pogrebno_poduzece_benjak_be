@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, UseGuards, Request } from '@nestjs/common';
+import { Controller, Get, Post, Body, UseGuards, Request, Delete, Param, Put } from '@nestjs/common';
 import { FlowersService } from './flowers.service';
 import { Flower } from './flower.entity';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
@@ -31,5 +31,14 @@ export class FlowersController {
   getFlowersByIds(@Body() body: { ids: number[] }) {
     return this.flowersService.findByIds(body.ids);
 }
+  @Put(':id')
+  update(@Param('id') id: number, @Body() body: Partial<Flower>) {
+    return this.flowersService.update(id, body);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: number) {
+    return this.flowersService.remove(id);
+  }
 
 }

@@ -1,7 +1,7 @@
-import { IsString, IsIn } from 'class-validator';
+import { IsEnum } from 'class-validator';
+import { OrderStatus } from '../order-status.enum';
 
 export class UpdateOrderStatusDto {
-  @IsString()
-  @IsIn(['pending', 'processed', 'done'])
-  status: 'pending' | 'processed' | 'done';
+  @IsEnum(OrderStatus)
+  status: OrderStatus;
 }

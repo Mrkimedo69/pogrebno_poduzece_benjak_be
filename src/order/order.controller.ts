@@ -11,28 +11,27 @@ import { Order } from './order.entity';
 import { OrderStatus } from './order-status.enum';
 
 @UseGuards(JwtAuthGuard, RolesGuard)
-@Roles('employee')
 @Controller('orders')
 export class OrdersController {
   constructor(private readonly ordersService: OrdersService) {}
 
-  @UseGuards(JwtAuthGuard)
   @Post()
   create(@Body() createOrderDto: CreateOrderDto) {
     return this.ordersService.create(createOrderDto);
   }
 
+  @Roles('employee')
   @Get()
   findAll(@Req() request: Request): Promise<Order[]> {
     const status = request.query['status'] as OrderStatus | undefined;
 
-    if (status && !['pending', 'rejected'].includes(status)) {
+    if (status && !Object.values(OrderStatus).includes(status)) {
       throw new BadRequestException('Neispravan status narudžbe');
     }
-
     return this.ordersService.findAll(status);
   }
 
+  @Roles('employee')
   @Patch(':id/status')
   async updateOrderStatus(
     @Param('id') id: string,
@@ -45,11 +44,14 @@ export class OrdersController {
     }
     return this.ordersService.updateStatus(+id, updateStatusDto.status, userId);
   }
+
+  @Roles('employee')
   @Get('archived')
     findAllArchived() {
       return this.ordersService.findAllArchived();
   }
 
+  @Roles('employee')
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.ordersService.findOne(+id);

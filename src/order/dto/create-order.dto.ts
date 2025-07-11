@@ -1,5 +1,15 @@
 import { Type } from 'class-transformer';
-import { IsArray, IsEmail, IsNotEmpty, IsNumber, IsOptional, IsString, ValidateNested } from 'class-validator';
+import {
+  IsArray,
+  IsEmail,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsPhoneNumber,
+  IsString,
+  MaxLength,
+  ValidateNested
+} from 'class-validator';
 import { OrderItemDto } from './order-item.dto';
 
 export class CreateOrderDto {
@@ -10,12 +20,18 @@ export class CreateOrderDto {
   @IsEmail()
   email: string;
 
+  @IsString()
+  @IsNotEmpty()
+  @IsPhoneNumber('HR')
+  phone: string;
+
   @IsOptional()
   @IsString()
-  phone?: string;
-
+  @MaxLength(500)
+  comment?: string;
+  
   @IsNumber()
-    totalPrice: number;
+  totalPrice: number;
 
   @IsArray()
   @ValidateNested({ each: true })

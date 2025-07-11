@@ -17,10 +17,8 @@ export class CartController {
     return this.cartService.clearCart(req.user.userId);
   }
 
-  @UseGuards(JwtAuthGuard)
   @Post('sync')
   async sync(@Req() req, @Body() body: { artikli: any[]; cvijece: any[] }) {
-  
     return this.cartService.syncCart(req.user.userId, body.artikli, body.cvijece);
   }
 

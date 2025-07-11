@@ -22,7 +22,10 @@ export class OrdersService {
 
   async findAll(status?: OrderStatus): Promise<Order[]> {
     if (status) {
-      return this.orderRepo.find({ where: { status } });
+      return this.orderRepo.find({
+        where: { status },
+        order: { createdAt: 'DESC' },
+      });
     }
     return this.orderRepo.find();
   }

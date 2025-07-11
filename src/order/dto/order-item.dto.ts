@@ -26,7 +26,7 @@ export class OrderItemDto {
     category?: string;
   
     @IsString()
-    @IsIn(['artikl', 'flower'])
-    type: 'artikl' | 'flower';
+    @IsIn(['artikl', 'cvijet'])
+    type: 'artikl' | 'cvijet';
   }
   

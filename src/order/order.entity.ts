@@ -18,12 +18,15 @@ export class Order {
   @Column('jsonb')
   items: any[];
 
+  @Column({ nullable: true })
+  comment?: string;
+
   @Column('decimal', { precision: 10, scale: 2 })
   totalPrice: number;
 
-  @Column()
+  @Column({ default: OrderStatus.PENDING })
   status: OrderStatus;
-
+  
   @CreateDateColumn()
   createdAt: Date;
 

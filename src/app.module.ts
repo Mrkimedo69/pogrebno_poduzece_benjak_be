@@ -42,7 +42,7 @@ import { OrdersModule } from './order/order.module';
         StoneMaterial,
         CartItem
       ],
-      synchronize: false,
+      synchronize: true,
       autoLoadEntities: true,
     }),
 

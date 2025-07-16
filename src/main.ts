@@ -2,9 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { UsersService } from './users/users.service';
-import * as bcrypt from 'bcrypt';
 import { UserRole } from './users/user.entity';
-import { async } from 'rxjs';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

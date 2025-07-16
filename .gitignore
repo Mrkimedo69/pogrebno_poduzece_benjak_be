@@ -54,3 +54,16 @@ pids
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Docker
+Dockerfile
+.dockerignore
+
+# Env primjer (može ostati verzioniran)
+!.env.production
+
+# Nest CLI output (ako koristiš build folder mimo dist)
+nestjs-cli.json
+
+# Render/Heroku
+Procfile

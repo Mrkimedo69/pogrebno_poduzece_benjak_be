@@ -19,6 +19,8 @@ import { CartItem } from './cart/cart-item.entity';
 import { Monument } from './monuments/spomenici.entity';
 import { StoneMaterial } from './stone-materials/stone-materials.entity';
 import { OrdersModule } from './order/order.module';
+import { FirebaseModule } from './firebase/firebase.module';
+import { UploadController } from './firebase/firebase.controller';
 
 @Module({
   imports: [
@@ -55,8 +57,9 @@ import { OrdersModule } from './order/order.module';
     PaymentModule,
     CartModule,
     OrdersModule,
+    FirebaseModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController,UploadController],
   providers: [AppService],
 })
 export class AppModule {}

@@ -1,6 +1,7 @@
 import { Type } from 'class-transformer';
 import {
   IsArray,
+  IsDecimal,
   IsEmail,
   IsNotEmpty,
   IsNumber,
@@ -30,7 +31,7 @@ export class CreateOrderDto {
   @MaxLength(500)
   comment?: string;
   
-  @IsNumber()
+  @IsDecimal()
   totalPrice: number;
 
   @IsArray()

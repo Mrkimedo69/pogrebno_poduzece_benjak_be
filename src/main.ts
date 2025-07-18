@@ -1,11 +1,13 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { join } from 'path';
+import { NestExpressApplication } from '@nestjs/platform-express';
 import { ValidationPipe } from '@nestjs/common';
 import { UsersService } from './users/users.service';
 import { UserRole } from './users/user.entity';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
   const usersService = app.get(UsersService);
   app.enableCors();
   app.setGlobalPrefix('api');
@@ -14,6 +16,9 @@ async function bootstrap() {
     forbidNonWhitelisted: true,
     transform: true,
   }));
+  app.useStaticAssets(join(__dirname, '..', 'uploads'), {
+    prefix: '/uploads/',
+  });
   const adminEmail = 'admin@site.com';
   const existingAdmin = await usersService.findByEmail(adminEmail);
 

@@ -12,7 +12,6 @@ import { AuthModule } from './auth/auth.module';
 import { PaymentModule } from './payment/payment.module';
 import { CartModule } from './cart/cart.module';
 
-// Entiteti
 import { PogrebniArtikl } from './artikli/pogrebni-artikl.entity';
 import { Flower } from './flowers/flower.entity';
 import { User } from './users/user.entity';
@@ -20,17 +19,23 @@ import { CartItem } from './cart/cart-item.entity';
 import { Monument } from './monuments/spomenici.entity';
 import { StoneMaterial } from './stone-materials/stone-materials.entity';
 import { OrdersModule } from './order/order.module';
+import { FirebaseModule } from './firebase/firebase.module';
+import { UploadController } from './firebase/firebase.controller';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: `.env.${process.env.NODE_ENV || 'local'}`,
+    }),
+
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: 'admin',
-      database: 'pogrebno_benjak_db',
+      host: required('DB_HOST', process.env.DB_HOST),
+      port: parseInt(required('DB_PORT', process.env.DB_PORT), 10),
+      username: required('DB_USERNAME', process.env.DB_USERNAME),
+      password: required('DB_PASSWORD', process.env.DB_PASSWORD),
+      database: required('DB_NAME', process.env.DB_NAME),
       entities: [
         PogrebniArtikl,
         Flower,
@@ -39,9 +44,10 @@ import { OrdersModule } from './order/order.module';
         StoneMaterial,
         CartItem
       ],
-      synchronize: true,
+      synchronize: false,
       autoLoadEntities: true,
     }),
+
     UsersModule,
     FlowersModule,
     ArtikliModule,
@@ -51,8 +57,16 @@ import { OrdersModule } from './order/order.module';
     PaymentModule,
     CartModule,
     OrdersModule,
+    FirebaseModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController,UploadController],
   providers: [AppService],
 })
 export class AppModule {}
+
+function required(name: string, value?: string): string {
+  if (!value) {
+    throw new Error(`❌ Missing required ENV variable: ${name}`);
+  }
+  return value;
+}

@@ -1,4 +1,4 @@
-import { Type } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 import {
   IsArray,
   IsDecimal,
@@ -31,7 +31,8 @@ export class CreateOrderDto {
   @MaxLength(500)
   comment?: string;
   
-  @IsDecimal()
+  @IsNumber({ allowNaN: false, allowInfinity: false }, { message: 'totalPrice must be a number.' })
+  @Type(() => Number)
   totalPrice: number;
 
   @IsArray()

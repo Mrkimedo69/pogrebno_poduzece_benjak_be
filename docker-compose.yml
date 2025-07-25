@@ -4,8 +4,6 @@ services:
   backend:
     build:
       context: .
-      args:
-        FIREBASE_CONFIG: ${FIREBASE_CONFIG}
     ports:
       - "3000:3000"
     env_file:

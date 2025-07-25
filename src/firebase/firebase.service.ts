@@ -26,6 +26,10 @@ export class FirebaseService {
 
 
   async uploadImage(file: Express.Multer.File): Promise<string> {
+    if (!file?.buffer) {
+      throw new Error('Datoteka nema buffer - provjeri Multer storage!');
+    }
+
     const fileName = `${Date.now()}-${file.originalname}`;
     const bucket = admin.storage().bucket();
     const fileUpload = bucket.file(fileName);

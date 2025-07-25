@@ -1,5 +1,6 @@
 import {
   Controller,
+  Get,
   Post,
   UploadedFile,
   UseInterceptors,
@@ -11,6 +12,7 @@ import { extname } from 'path';
 import { Express } from 'express';
 import { existsSync, mkdirSync } from 'fs';
 import { memoryStorage } from 'multer';
+import * as admin from 'firebase-admin';
 
 @Controller('upload')
 export class UploadController {
@@ -49,6 +51,17 @@ export class UploadController {
     }else {
       const localUrl = `/uploads/${file.filename}`;
       return { imageUrl: localUrl };
+    }
+  }
+
+  @Get('firebase-test')
+  async testFirebase() {
+    try {
+      await admin.auth().listUsers(1);
+      return { success: true, message: '✅ Firebase povezan i radi' };
+    } catch (error) {
+      console.error('❌ Firebase ERROR:', error);
+      return { success: false, message: '❌ Firebase NE radi', error: error.message };
     }
   }
 }

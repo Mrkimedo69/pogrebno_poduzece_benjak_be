@@ -6,14 +6,15 @@ import { Express } from 'express';
 @Injectable()
 export class FirebaseService {
   constructor() {
-    const serviceAccount = JSON.parse(process.env.FIREBASE_CONFIG || '{}');
-    console.log('Looking for firebase.json at:', join(process.cwd(), 'config/firebase.json'));
+    const serviceAccount = JSON.parse(
+      (process.env.FIREBASE_CONFIG || '').replace(/\\n/g, '\n')
+    );
     admin.initializeApp({
       credential: admin.credential.cert(serviceAccount),
       storageBucket: 'pogrebno-poduzece-benjak-doo.firebasestorage.app',
     });
   }
-  
+
 
   async uploadImage(file: Express.Multer.File): Promise<string> {
     const fileName = `${Date.now()}-${file.originalname}`;

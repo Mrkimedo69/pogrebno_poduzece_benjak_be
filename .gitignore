@@ -70,3 +70,4 @@ nestjs-cli.json
 # Render/Heroku
 Procfile
 config/firebase.json
+.env.production

@@ -1,18 +1,21 @@
 import { Injectable } from '@nestjs/common';
 import * as admin from 'firebase-admin';
-import { join } from 'path';
-import { Express } from 'express';
 
 @Injectable()
 export class FirebaseService {
   constructor() {
-    const serviceAccount = JSON.parse(
-      (process.env.FIREBASE_CONFIG || '').replace(/\\n/g, '\n')
-    );
-    admin.initializeApp({
-      credential: admin.credential.cert(serviceAccount),
-      storageBucket: 'pogrebno-poduzece-benjak-doo.appspot.com',
-    });
+    if (process.env.NODE_ENV === 'production') {
+      const serviceAccount = JSON.parse(
+        (process.env.FIREBASE_CONFIG || '').replace(/\\n/g, '\n')
+      );
+
+      admin.initializeApp({
+        credential: admin.credential.cert(serviceAccount),
+        storageBucket: 'pogrebno-poduzece-benjak-doo.appspot.com',
+      });
+    } else {
+      console.log('Firebase se ne koristi u lokalnom okruženju.');
+    }
   }
 
 

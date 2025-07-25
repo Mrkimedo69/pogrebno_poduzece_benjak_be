@@ -13,6 +13,7 @@ export class FirebaseService {
       storageBucket: 'pogrebno-poduzece-benjak-doo.firebasestorage.app',
     });
   }
+  
 
   async uploadImage(file: Express.Multer.File): Promise<string> {
     const fileName = `${Date.now()}-${file.originalname}`;

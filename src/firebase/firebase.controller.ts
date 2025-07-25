@@ -12,7 +12,6 @@ import { extname } from 'path';
 import { Express } from 'express';
 import { existsSync, mkdirSync } from 'fs';
 import { memoryStorage } from 'multer';
-import * as admin from 'firebase-admin';
 
 @Controller('upload')
 export class UploadController {
@@ -35,13 +34,6 @@ export class UploadController {
     }),
   }))
   async upload(@UploadedFile() file: Express.Multer.File) {
-    console.log('✅ File primljen:', {
-      originalname: file.originalname,
-      mimetype: file.mimetype,
-      size: file.size,
-      buffer: !!file.buffer,
-    });
-
     if (process.env.NODE_ENV === 'production') {
       if (!file || !file.buffer) {
         throw new Error('Firebase upload failed: file buffer missing.');
@@ -54,14 +46,4 @@ export class UploadController {
     }
   }
 
-  @Get('firebase-test')
-  async testFirebase() {
-    try {
-      await admin.auth().listUsers(1);
-      return { success: true, message: '✅ Firebase povezan i radi' };
-    } catch (error) {
-      console.error('❌ Firebase ERROR:', error);
-      return { success: false, message: '❌ Firebase NE radi', error: error.message };
-    }
-  }
 }

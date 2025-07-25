@@ -1,6 +1,7 @@
-import { Type } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 import {
   IsArray,
+  IsDecimal,
   IsEmail,
   IsNotEmpty,
   IsNumber,
@@ -30,7 +31,8 @@ export class CreateOrderDto {
   @MaxLength(500)
   comment?: string;
   
-  @IsNumber()
+  @IsNumber({ allowNaN: false, allowInfinity: false }, { message: 'totalPrice must be a number.' })
+  @Type(() => Number)
   totalPrice: number;
 
   @IsArray()

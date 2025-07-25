@@ -6,7 +6,7 @@ import { Express } from 'express';
 @Injectable()
 export class FirebaseService {
   constructor() {
-    const serviceAccount = require(join(process.cwd(), 'config/firebase.json'));
+    const serviceAccount = JSON.parse(process.env.FIREBASE_CONFIG || '{}');
     console.log('Looking for firebase.json at:', join(process.cwd(), 'config/firebase.json'));
     admin.initializeApp({
       credential: admin.credential.cert(serviceAccount),

@@ -11,7 +11,7 @@ export class FirebaseService {
     );
     admin.initializeApp({
       credential: admin.credential.cert(serviceAccount),
-      storageBucket: 'pogrebno-poduzece-benjak-doo.firebasestorage.app',
+      storageBucket: 'pogrebno-poduzece-benjak-doo.appspot.com',
     });
   }
 

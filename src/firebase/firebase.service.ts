@@ -17,7 +17,7 @@ export class FirebaseService {
           clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
           privateKey,
         }),
-        storageBucket: 'pogrebno-poduzece-benjak-doo.appspot.com',
+        storageBucket: 'pogrebno-poduzece-benjak-doo.firebasestorage.app',
       });
     } else {
       console.log('Firebase se ne koristi u lokalnom okruženju.');

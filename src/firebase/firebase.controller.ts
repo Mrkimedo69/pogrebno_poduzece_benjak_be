@@ -33,6 +33,13 @@ export class UploadController {
     }),
   }))
   async upload(@UploadedFile() file: Express.Multer.File) {
+    console.log('✅ File primljen:', {
+      originalname: file.originalname,
+      mimetype: file.mimetype,
+      size: file.size,
+      buffer: !!file.buffer,
+    });
+
     if (process.env.NODE_ENV === 'production') {
       if (!file || !file.buffer) {
         throw new Error('Firebase upload failed: file buffer missing.');

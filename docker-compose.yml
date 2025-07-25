@@ -1,12 +1,15 @@
--version: '3.8'
+version: '3.8'
 
 services:
   backend:
-    build: .
+    build:
+      context: .
+      args:
+        FIREBASE_CONFIG: ${FIREBASE_CONFIG}
     ports:
       - "3000:3000"
     env_file:
-      - .env
+      - .env.production
     volumes:
       - .:/app
     command: npm run start:prod

@@ -69,8 +69,5 @@ nestjs-cli.json
 
 # Render/Heroku
 Procfile
-<<<<<<< HEAD
 config/firebase.json
-=======
->>>>>>> 37cca70 (Prod prep)
 .env.production

@@ -12,10 +12,10 @@ export class StoneMaterial {
   textureUrl: string;
 
   @Column()
-  color: string;
+  colorHex: string;
 
   @Column({ type: 'decimal', precision: 10, scale: 2 })
-  pricePerM3: number;
+  pricePerM2: number;
 
   @Column()
   isAvailable: boolean;

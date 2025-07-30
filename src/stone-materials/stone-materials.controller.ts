@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Body } from '@nestjs/common';
 import { StoneMaterialsService } from './stone-materials.service';
 import { StoneMaterial } from './stone-materials.entity';
+import { CreateStoneMaterialDto } from './dto/stone-materials.dto';
 
 @Controller('stone-materials')
 export class StoneMaterialsController {
@@ -10,9 +11,9 @@ export class StoneMaterialsController {
   findAll(): Promise<StoneMaterial[]> {
     return this.service.findAll();
   }
-
+  
   @Post()
-  create(@Body() data: Partial<StoneMaterial>): Promise<StoneMaterial> {
-    return this.service.create(data);
+  create(@Body() dto: CreateStoneMaterialDto): Promise<StoneMaterial> {
+    return this.service.create(dto);
   }
 }

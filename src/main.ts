@@ -43,6 +43,9 @@ async function bootstrap() {
     });
     console.log(`✔ Employee korisnik stvoren (${employeeEmail})`);
   }
+  
+  const port = process.env.PORT ?? 3000;
+  await app.listen(port);
 }
 bootstrap();
 

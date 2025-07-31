@@ -9,21 +9,21 @@ export class CartController {
 
   @Patch('item')
   updateItemQuantity(@Req() req, @Body() body: { id: number; type: 'cvijet' | 'artikl'; quantity: number }) {
-    return this.cartService.updateQuantity(req.user.userId, body.id, body.type, body.quantity);
+    return this.cartService.updateQuantity(req.user.id, body.id, body.type, body.quantity);
   }
 
   @Post('clear')
   clear(@Req() req) {
-    return this.cartService.clearCart(req.user.userId);
+    return this.cartService.clearCart(req.user.id);
   }
 
   @Post('sync')
   async sync(@Req() req, @Body() body: { artikli: any[]; cvijece: any[] }) {
-    return this.cartService.syncCart(req.user.userId, body.artikli, body.cvijece);
+    return this.cartService.syncCart(req.user.id, body.artikli, body.cvijece);
   }
 
   @Get()
   getCart(@Req() req) {
-    return this.cartService.getCart(req.user.userId);
+    return this.cartService.getCart(req.user.id);
   }
 }

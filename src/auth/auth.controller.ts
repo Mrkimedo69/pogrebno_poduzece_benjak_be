@@ -27,7 +27,7 @@ export class AuthController {
   @Get('me')
   async getMe(@Request() req) {
     return {
-      id: req.user.userId,
+      id: req.user.id,
       email: req.user.email,
       role: req.user.role,
     };

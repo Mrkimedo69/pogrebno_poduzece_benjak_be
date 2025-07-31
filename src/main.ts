@@ -43,11 +43,6 @@ async function bootstrap() {
     });
     console.log(`✔ Employee korisnik stvoren (${employeeEmail})`);
   }
-  
-  const port = process.env.PORT ?? 3000;
-  await app.listen(port);
-  console.log(`🚀 Backend pokrenut na http://localhost:${port}/api`);
-
 }
 bootstrap();
 

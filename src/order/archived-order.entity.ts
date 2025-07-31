@@ -1,4 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from "typeorm";
+import { OrderStatus } from "./order-status.enum";
 
 @Entity()
 export class ArchivedOrder {
@@ -10,6 +11,9 @@ export class ArchivedOrder {
 
   @Column()
   email: string;
+
+  @Column()
+  userId: number;
 
   @Column('jsonb')
   items: any[];
@@ -23,6 +27,12 @@ export class ArchivedOrder {
   @Column()
   resolvedBy: string;
 
+  @Column({ type: 'enum', enum: OrderStatus })
+  status: OrderStatus;
+
   @CreateDateColumn()
   archivedAt: Date;
+
+  @Column({ type: 'timestamp' })
+  createdAt: Date;
 }

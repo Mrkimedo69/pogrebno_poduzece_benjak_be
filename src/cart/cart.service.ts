@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CartItem } from './cart-item.entity';
@@ -30,10 +30,10 @@ export class CartService {
       ...artikli.map(a => ({ ...a, type: 'artikl' })),
       ...cvijece.map(f => ({ ...f, type: 'cvijet' }))
     ];
-  
+    if (!userId) throw new BadRequestException('Korisnik nije prijavljen');
     const toSave = all.map(i =>
       this.cartRepo.create({
-        userId,
+        user: { id: userId },
         itemId: i.id,
         quantity: i.quantity,
         type: i.type as 'cvijet' | 'artikl'

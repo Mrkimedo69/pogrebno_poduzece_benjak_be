@@ -1,10 +1,17 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne } from 'typeorm';
 import { OrderStatus } from './order-status.enum';
+import { User } from 'src/users/user.entity';
 
 @Entity()
 export class Order {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @ManyToOne(() => User, { eager: false, nullable: false, onDelete: 'CASCADE' })
+  user: User;
+
+  @Column()
+  userId: number;
 
   @Column()
   fullName: string;

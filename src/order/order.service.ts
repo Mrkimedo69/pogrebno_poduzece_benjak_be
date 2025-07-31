@@ -43,31 +43,42 @@ export class OrdersService {
     return this.archivedRepo.find({ order: { archivedAt: 'DESC' } });
   }
 
-async updateStatus(id: number, status: OrderStatus, userId: number) {
-  const order = await this.orderRepo.findOne({ where: { id } });
-  if (!order) throw new NotFoundException('Narudžba nije pronađena');
+  async updateStatus(id: number, status: OrderStatus, userId: number) {
+    const order = await this.orderRepo.findOne({ where: { id } });
+    if (!order) throw new NotFoundException('Narudžba nije pronađena');
 
-  const employee = await this.userRepo.findOne({ where: { id: userId } });
-  if (!employee) throw new NotFoundException('Zaposlenik nije pronađen');
+    const employee = await this.userRepo.findOne({ where: { id: userId } });
+    if (!employee) throw new NotFoundException('Zaposlenik nije pronađen');
 
-  if (status === 'resolved') {
-    await this.archivedRepo.save({
-      fullName: order.fullName,
-      email: order.email,
-      items: order.items,
-      totalPrice: order.totalPrice,
-      originalOrderId: order.id,
-      resolvedBy: employee.fullName,
-    });
+    if (status === 'resolved' || status === 'rejected') {
+      await this.archivedRepo.save({
+        userId: order.userId,
+        fullName: order.fullName,
+        email: order.email,
+        items: order.items,
+        totalPrice: order.totalPrice,
+        originalOrderId: order.id,
+        resolvedBy: employee.fullName,
+        status,
+        createdAt: order.createdAt
+      });
 
-    await this.orderRepo.remove(order);
+      await this.orderRepo.remove(order);
 
-    return { message: 'Narudžba arhivirana i uklonjena iz aktivnih.' };
+      return { message: `Narudžba arhivirana kao '${status}' i uklonjena iz aktivnih.` };
+    }
+
+    order.status = status;
+    return this.orderRepo.save(order);
   }
 
-  order.status = status;
-  return this.orderRepo.save(order);
-}
+  async findAllForUser(userId: number): Promise<(Order | ArchivedOrder)[]> {
+    const active = await this.orderRepo.find({ where: { userId }, order: { createdAt: 'DESC' } });
+    const archived = await this.archivedRepo.find({ where: { userId }, order: { archivedAt: 'DESC' } });
+
+    return [...active, ...archived];
+  }
+
 
   
 }

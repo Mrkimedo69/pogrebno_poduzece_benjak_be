@@ -16,8 +16,9 @@ export class OrdersController {
   constructor(private readonly ordersService: OrdersService) {}
 
   @Post()
-  create(@Body() createOrderDto: CreateOrderDto) {
-    return this.ordersService.create(createOrderDto);
+  create(@Body() createOrderDto: CreateOrderDto, @Req() req: Request) {
+    const userId = req.user?.id;
+    return this.ordersService.create({ ...createOrderDto, userId });
   }
 
   @Roles('employee')
@@ -30,6 +31,17 @@ export class OrdersController {
     }
     return this.ordersService.findAll(status);
   }
+
+  @Roles('user')
+  @Get('user_orders')
+  async getMyOrders(@Req() req: Request) {
+    const userId = req.user?.id;
+    if (!userId) {
+      throw new UnauthorizedException('Korisnik nije pronađen.');
+    }
+    return this.ordersService.findAllForUser(userId);
+  }
+
 
   @Roles('employee')
   @Patch(':id/status')

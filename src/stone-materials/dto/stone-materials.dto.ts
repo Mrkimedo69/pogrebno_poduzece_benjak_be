@@ -12,7 +12,7 @@ export class CreateStoneMaterialDto {
   colorHex: string;
 
   @IsNumber()
-  pricePerM3: number;
+  pricePerM2: number;
 
   @IsBoolean()
   isAvailable: boolean;

@@ -8,7 +8,7 @@ export class StoneMaterial {
   @Column()
   name: string;
 
-  @Column()
+  @Column({ nullable: true })
   textureUrl: string;
 
   @Column()

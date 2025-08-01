@@ -27,7 +27,7 @@ export class ArchivedOrder {
   @Column()
   resolvedBy: string;
 
-  @Column({ type: 'enum', enum: OrderStatus })
+  @Column({ type: 'enum', enum: OrderStatus, default: 'rejected'})
   status: OrderStatus;
 
   @CreateDateColumn()

@@ -21,6 +21,7 @@ import { StoneMaterial } from './stone-materials/stone-materials.entity';
 import { OrdersModule } from './order/order.module';
 import { FirebaseModule } from './firebase/firebase.module';
 import { UploadController } from './firebase/firebase.controller';
+import { MonumentRequestModule } from './monument-request/monument-request.module';
 
 @Module({
   imports: [
@@ -44,7 +45,7 @@ import { UploadController } from './firebase/firebase.controller';
         StoneMaterial,
         CartItem
       ],
-      synchronize: false,
+      synchronize: true,
       autoLoadEntities: true,
     }),
 
@@ -58,6 +59,7 @@ import { UploadController } from './firebase/firebase.controller';
     CartModule,
     OrdersModule,
     FirebaseModule,
+    MonumentRequestModule,
   ],
   controllers: [AppController,UploadController],
   providers: [AppService],

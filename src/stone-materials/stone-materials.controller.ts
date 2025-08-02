@@ -15,7 +15,6 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { RolesGuard } from 'src/auth/roles.guard';
 import { Roles } from 'src/auth/roles.decorator';
 
-@UseGuards(JwtAuthGuard, RolesGuard)
 @Controller('stone-materials')
 export class StoneMaterialsController {
   constructor(private readonly service: StoneMaterialsService) {}
@@ -25,18 +24,21 @@ export class StoneMaterialsController {
     return this.service.findAll();
   }
 
+  @UseGuards(JwtAuthGuard,RolesGuard)
   @Roles('admin')
   @Get('admin')
   findAllAdmin(): Promise<StoneMaterial[]> {
     return this.service.findAll();
   }
 
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('admin')
   @Post()
   create(@Body() dto: CreateStoneMaterialDto): Promise<StoneMaterial> {
     return this.service.create(dto);
   }
 
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('admin')
   @Put(':id')
   update(
@@ -46,6 +48,7 @@ export class StoneMaterialsController {
     return this.service.update(id, data);
   }
 
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('admin')
   @Delete(':id')
   delete(@Param('id') id: number): Promise<void> {

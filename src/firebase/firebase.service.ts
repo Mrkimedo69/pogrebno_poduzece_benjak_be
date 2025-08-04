@@ -37,11 +37,13 @@ export class FirebaseService {
     await fileUpload.save(file.buffer, {
       metadata: {
         contentType: file.mimetype,
-        firebaseStorageDownloadTokens: fileName,
+        metadata: {
+          firebaseStorageDownloadTokens: fileName,
+        },
       },
       validation: 'md5',
     });
 
-    return `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/${encodeURIComponent(fileName)}?alt=media`;
+    return `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/${encodeURIComponent(fileName)}?alt=media&token=${fileName}`;
   }
 }

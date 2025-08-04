@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import * as admin from 'firebase-admin';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class FirebaseService {
@@ -33,17 +34,18 @@ export class FirebaseService {
     const fileName = `${folder}/${Date.now()}-${safeName}`;
     const bucket = admin.storage().bucket();
     const fileUpload = bucket.file(fileName);
+    const downloadToken = uuidv4();
 
     await fileUpload.save(file.buffer, {
       metadata: {
         contentType: file.mimetype,
         metadata: {
-          firebaseStorageDownloadTokens: fileName,
+          firebaseStorageDownloadTokens: downloadToken,
         },
       },
       validation: 'md5',
     });
 
-    return `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/${encodeURIComponent(fileName)}?alt=media&token=${fileName}`;
+    return `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/${encodeURIComponent(fileName)}?alt=media&token=${downloadToken}`;
   }
 }

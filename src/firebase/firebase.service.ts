@@ -39,7 +39,6 @@ export class FirebaseService {
         contentType: file.mimetype,
         firebaseStorageDownloadTokens: fileName,
       },
-      public: true,
       validation: 'md5',
     });
 

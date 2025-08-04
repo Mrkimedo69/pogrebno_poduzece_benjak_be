@@ -45,7 +45,7 @@ import { MonumentRequestModule } from './monument-request/monument-request.modul
         StoneMaterial,
         CartItem
       ],
-      synchronize: true,
+      synchronize: false,
       autoLoadEntities: true,
     }),
 

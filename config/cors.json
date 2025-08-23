@@ -1,0 +1,8 @@
+[
+  {
+    "origin": ["https://mrkimedo69-benjak-doo.static.hf.space"],
+    "method": ["GET"],
+    "maxAgeSeconds": 3600,
+    "responseHeader": ["Content-Type", "Access-Control-Allow-Origin"]
+  }
+]
